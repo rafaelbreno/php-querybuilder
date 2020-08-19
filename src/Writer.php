@@ -12,9 +12,16 @@ use Helpers\Helper;
 
 class Writer
 {
-    public function getQuery($table, Closure $callback)
+    public function formQuery($table, Closure $callback)
     {
-        Helper::tap($table, $callback);
+        $builder = Helper::tap(
+                $this->createBuilder($table),
+                function ($builder) use ($callback) {
+                    $callback($builder);
+                }
+            );
+
+        return $this->getQuery($builder);
     }
 
 
