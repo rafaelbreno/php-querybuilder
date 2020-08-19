@@ -1,0 +1,11 @@
+# IDE Folder
+/.idea/
+/.vscode/
+
+# Package Manager Folder
+/vendor/
+/node_modules/
+
+# Ignored Files
+*.lock
+*.cache
