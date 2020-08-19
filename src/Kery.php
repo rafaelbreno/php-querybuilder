@@ -7,16 +7,17 @@
  * */
 namespace Kery;
 
+use Closure;
+
 class Kery
 {
-    public static function init($table, \Closure $closure)
+    /**
+     * @param $table
+     * @param Closure $callback
+     * @return mixed
+     */
+    public static function init($table, Closure $callback)
     {
-
-        return self::getQuery();
-    }
-
-    protected static function getQuery()
-    {
-        return "hello";
+        return (new Writer)->formQuery($table, $callback);
     }
 }
