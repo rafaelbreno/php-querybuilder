@@ -1,7 +1,8 @@
 <?php
 /* Pretty simple Class just to clean
  * some methods at Kery
- * Here we'll be building the base structure to form our SQL Query
+ * Here we'll be building the base
+ * structure to form our SQL Query
  * */
 
 namespace Kery;
@@ -24,5 +25,13 @@ class Writer
         return $this->getQuery($builder);
     }
 
+    protected function getQuery(Builder $builder)
+    {
+        return $builder->params['sql'];
+    }
 
+    protected function createBuilder($table)
+    {
+        return new Builder($table);
+    }
 }
