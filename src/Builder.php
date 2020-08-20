@@ -10,5 +10,26 @@ namespace Kery;
 
 class Builder
 {
+    public array $params = [];
+    public function __construct(string $table)
+    {
+        $this->params['table'] = $table;
+    }
 
+    public function generateQuery()
+    {
+        return (new QueryGenerator($this->params))->returnQuery();
+    }
+
+    public function select(...$columns)
+    {
+        $this->params['method'] = "SELECT";
+        $this->params['columns'] = $this->defineColumns($columns);
+    }
+
+    protected function defineColumns($columns)
+    {
+        $columns = array_filter($columns, 'strlen');
+        return (count($columns) > 0) ? $columns : ['*'];
+    }
 }
