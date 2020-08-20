@@ -18,7 +18,7 @@ class Arr
         for($i = 0; $i < $count; $i++)
         {
             $str .= "{$arr[$i]}" . (($i == ($count - 1)) ? ""
-                                                             : "{$delimiter}");
+                                                         : "{$delimiter}");
         }
         return $str;
     }

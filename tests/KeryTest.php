@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace Test;
 
@@ -30,4 +30,35 @@ class KeryTest extends TestCase
 //        });
 //        $this->assertSame($expected, $actual);
 //    }
+
+    /* 3rd Test Passed!
+     * This test is where the query builder
+     * starts to get a little more interesting
+     * Now it need to return a complete query
+     * */
+    public function testGetSelectAllFromAuthors()
+    {
+        $expected = "SELECT * from authors";
+
+        $actual = Kery::init("authors", function (Builder $builder) {
+           $builder->select();
+        });
+
+        $this->assertSame($expected, $actual);
+    }
+
+    /* 4th Test
+     * The same test above, but will add specific columns
+     * instead of "*"
+     * */
+    public function testSelectColumnsFromAuthors()
+    {
+        $expected = "SELECT name,age from authors";
+
+        $actual = Kery::init("authors", function (Builder $builder) {
+            $builder->select('name', 'age');
+        });
+
+        $this->assertSame($expected, $actual);
+    }
 }
