@@ -61,4 +61,39 @@ class KeryTest extends TestCase
 
         $this->assertSame($expected, $actual);
     }
+
+    /* 5th Test
+     * The same test above, but will add specific columns
+     * instead of "*"
+     * */
+    public function testSelectColumnsFromAuthorsWithSimpleWhere()
+    {
+        $expected = "SELECT name,age from authors WHERE name = rafael";
+
+        $actual = Kery::init("authors", function (Builder $builder) {
+            $builder->select('name', 'age');
+            $builder->where('name', '=', 'rafael');
+        });
+
+        $this->assertSame($expected, $actual);
+    }
+
+    /* 5th Test
+     * The same test above, but will add specific columns
+     * instead of "*"
+     * */
+    public function testSelectColumnsFromAuthorsWithMultiplesSimpleWhere()
+    {
+        $expected = "SELECT name,age from authors WHERE name = rafael AND age > 30";
+
+        $actual = Kery::init("authors", function (Builder $builder) {
+            $builder->select('name', 'age');
+            $builder->where(array(
+                ['name', '=', 'rafael', 'AND'],
+                ['age', '>', '30']
+            ));
+        });
+
+        $this->assertSame($expected, $actual);
+    }
 }
