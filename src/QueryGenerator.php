@@ -32,7 +32,6 @@ class QueryGenerator
     {
         foreach ($this->params as $key => $value)
         {
-            echo "{$key}<br>";
             $this->{$key}($value);
         }
     }
@@ -71,7 +70,7 @@ class QueryGenerator
         foreach ($wheres as $key => $value)
         {
 //            print_r($value)
-            $where .= implode(' ', $value);
+            $where .= implode(' ', $value) . " ";
         }
         return trim($where);
     }

@@ -32,9 +32,11 @@ class Builder
     public function where($column, string $condition = "", string $value = "", string $connector = "")
     {
         if(is_array($column)) {
+            $wheres = [];
             foreach ($column as $key => $value) {
-                $this->params['where'] = array_push($this->params['where'], $value);
+                $this->params['where'] = array_push($wheres, $value);
             }
+            $this->params['where'] = $wheres;
         } else {
             $wheres = [$column, $condition, $value, strtoupper($connector)];
             $this->params['where'] = [$wheres];
