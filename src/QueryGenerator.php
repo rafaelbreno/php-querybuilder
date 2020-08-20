@@ -9,8 +9,8 @@ use Helpers\Str;
 
 class QueryGenerator
 {
-    private $query = "";
-    protected $params = [];
+    private string $query = "";
+    protected array $params = [];
     public function __construct($params)
     {
         $this->params = $params;
@@ -32,7 +32,7 @@ class QueryGenerator
     {
         foreach ($this->params as $key => $value)
         {
-            echo "{$key}<br/>";
+            echo "{$key}<br>";
             $this->{$key}($value);
         }
     }
@@ -57,6 +57,23 @@ class QueryGenerator
     private function concatQuery($queryPiece)
     {
         $this->query = implode(' ', [$this->query, $queryPiece]);
+    }
+
+    protected function where($params)
+    {
+        $this->query = implode(' ', [$this->query, $this->generateWhere($params)]);
+    }
+
+    private function generateWhere($wheres)
+    {
+        $where = "WHERE ";
+//        print_r($wheres);
+        foreach ($wheres as $key => $value)
+        {
+//            print_r($value)
+            $where .= implode(' ', $value);
+        }
+        return trim($where);
     }
 
 }

@@ -29,6 +29,18 @@ class Builder
         $this->params['table'] = $this->table;
     }
 
+    public function where($column, string $condition = "", string $value = "", string $connector = "")
+    {
+        if(is_array($column)) {
+            foreach ($column as $key => $value) {
+                $this->params['where'] = array_push($this->params['where'], $value);
+            }
+        } else {
+            $wheres = [$column, $condition, $value, strtoupper($connector)];
+            $this->params['where'] = [$wheres];
+        }
+    }
+
     protected function defineColumns($columns)
     {
         $columns = array_filter($columns, 'strlen');
