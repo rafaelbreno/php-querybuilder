@@ -11,9 +11,10 @@ namespace Kery;
 class Builder
 {
     public array $params = [];
+    private string $table;
     public function __construct(string $table)
     {
-        $this->params['table'] = $table;
+        $this->table = $table;
     }
 
     public function generateQuery()
@@ -25,6 +26,7 @@ class Builder
     {
         $this->params['method'] = "SELECT";
         $this->params['columns'] = $this->defineColumns($columns);
+        $this->params['table'] = $this->table;
     }
 
     protected function defineColumns($columns)
