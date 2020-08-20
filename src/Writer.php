@@ -27,7 +27,7 @@ class Writer
 
     protected function getQuery(Builder $builder)
     {
-        return $builder->params['sql'];
+        return $builder->generateQuery();
     }
 
     protected function createBuilder($table)
