@@ -19,14 +19,19 @@ class QueryGenerator
     public function returnQuery()
     {
         $this->buildQuery();
+        $this->trimQuery();
         return $this->query;
+    }
+
+    private function trimQuery()
+    {
+        $this->query = trim($this->query);
     }
 
     protected function buildQuery()
     {
         foreach ($this->params as $key => $value)
         {
-
             echo "{$key}<br/>";
             $this->{$key}($value);
         }
